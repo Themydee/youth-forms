@@ -1,9 +1,12 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import { database } from './db/db'
+import express from "express"
+import dotenv from "dotenv"
+import { database } from "./db/db.js"
+import formRoutes from './routers/user.router.js'
+import cors from "cors"
 
 dotenv.config()
-const app = express()
+
+const app = express();
 const PORT = process.env.PORT || 5000
 
 
@@ -19,6 +22,8 @@ app.use(cors({
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+app.use("/api/form", formRoutes);
 
 app.listen(PORT, () => {
     database()
